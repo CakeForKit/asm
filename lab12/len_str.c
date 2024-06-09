@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 int my_strlen(const char *str)
 {
@@ -23,10 +24,24 @@ int my_strlen(const char *str)
     return len;
 }
 
+#define N 100
+
 int main()
 {
     int len;
-    char messg[] = "Hello, world!";
+    char messg[N]; // = "Hello, world!";
+
+    if (fgets(messg, N, stdin) == NULL)
+    {
+        printf("ERROR\n");
+        return 1;
+    }
+    
+    size_t real_len = strlen(messg);
+    messg[real_len - 1] = 0;
+    real_len--;
+    printf("%zu - %s\n", real_len, messg);
+
     len = my_strlen(messg);
     printf("String length = %d\n", len);
 
